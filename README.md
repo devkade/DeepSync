@@ -13,6 +13,6 @@ DeepSync AI paper study repository
 | Date       | Paper                                                      | Field       | Presenter      | Links |
 | ---------- | ---------------------------------------------------------- | ----------- | -------------- | ----- |
 | YYYY.MM.DD | [(Conference Name) (Publish Year) (Keyword)] paper name    | ex) CV, NLP |                |       |
-| 2023.08.27 | [CVPR 2014 InceptionNet-v1] Going Deeper with Convolutions | CV          | 강동규, 이민지 |      |
+| 2023.08.27 | [CVPR 2014 InceptionNet-v1] Going Deeper with Convolutions | CV          | 강동규, 이민지 | [Paper](https://arxiv.org/pdf/1409.4842.pdf)</br>[Review](https://github.com/mouseku/DeepSync/blob/main/Docs/InceptionNet-v1%20-%20Going%20Deeper%20with%20Convolutions.pdf)     |
 
 
