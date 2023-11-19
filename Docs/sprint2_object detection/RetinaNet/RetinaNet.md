@@ -71,17 +71,17 @@
 ### Training
 1. Feature Pyramid by ResNet + FPN
 <img src="figs\RetinaNet_1.png" title="onestage-object-detection" alt="onestage-object-detection"></img><br/>
-+ Input : image
-+ Process : feature extraction by ResNet + FPN
-+ Output : feature pyramid(P5~P7)
++ **Input : image**
++ **Process : feature extraction by ResNet + FPN**
++ **Output : feature pyramid(P5~P7)**
     + 먼저 이미지를 backbone network에 입력하여 서로 다른 5개의 scale을 가진 feature pyramid를 출력합니다.    
     여기서 backbone network는 ResNet 기반의 FPN(Feature Pyramid Network)를 사용합니다. pyramid level은 P3~P7로 설정합니다.
 <br></br>
 2. Classification by Classification subnetwork
 <img src="figs\RetinaNet_2.png" title="onestage-object-detection" alt="onestage-object-detection"></img><br/>
-+ Input : feature pyramid(P5~P7)
-+ Process : classification by classification subnetwork
-+ Output : 5 feature maps with KxA channel 
++ **Input : feature pyramid(P5~P7)**
++ **Process : classification by classification subnetwork**
++ **Output : 5 feature maps with KxA channel** 
     + 1)번 과정에서 얻은 각 pyramid level별 feature map을 Classification subnetwork에 입력합니다.   
     해당 subnet는 3x3(xC) conv layer - ReLU - 3x3(xKxA) conv layer로 구성되어 있습니다.   
     여기서 K는 분류하고자 하는 class의 수를, A는 anchor box의 수를 의미합니다. 논문에서는 A=9로 설정합니다.    
@@ -90,9 +90,9 @@
 <br></br>
 3. Bounding box regression by Bounding box regression subnetwork
 <img src="figs\RetinaNet_3.png" title="onestage-object-detection" alt="onestage-object-detection"></img><br/>
-+ Input : feature pyramid(P5~P7)
-+ Process : bounding box regression by bounding box regression subnet
-+ Output : 5 feature maps with 4xA channel
++ **Input : feature pyramid(P5~P7)**
++ **Process : bounding box regression by bounding box regression subnet**
++ **Output : 5 feature maps with 4xA channel**
     + 1)번 과정에서 얻은 각 pyramid level별 feature map을 Bounding box regression subnetwork에 입력합니다.    
     해당 subnet 역시 classification subnet과 마찬가지로 FCN(Fully Convolutional Network)입니다.    
     feature map이 anchor box별로 4개의 좌표값(x, y, w, h)을 encode하도록 channel 수를 조정합니다.    
