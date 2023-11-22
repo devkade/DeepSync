@@ -129,7 +129,9 @@ $$s_{c}=\frac{e^{r_c}}{\overset{C}{\underset{c=0}{\sum}} e^{r_c}}$$
 ### loss
 
 summation of the cross-entropy loss and the box regression loss
-$$L(s,t_{x,y,w,h})=L_{cls}(S_{c^{*}})+ \lambda[c^{*}>0]L_{reg}(t,t^{*})$$
+
+![image](https://github.com/ownvoy/DeepSync/assets/96481582/fc5ea835-8845-417b-8637-5bfa571a54ff)
+
 
 ### online hard example mining(OHEM)
 
@@ -144,6 +146,7 @@ $$L(s,t_{x,y,w,h})=L_{cls}(S_{c^{*}})+ \lambda[c^{*}>0]L_{reg}(t,t^{*})$$
 
 ## 2.3 Results
 
+![image](https://github.com/ownvoy/DeepSync/assets/96481582/9c8e4df0-92a7-43ef-997d-ea3371d9c6f1)
 
 
 
