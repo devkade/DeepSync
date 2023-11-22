@@ -59,35 +59,42 @@ object detection에서의 bounding box
 - R-FCN: 101층 모두 shared, fully convolutional architectures
 > Faster R-CNN의 마지막 Fully Connected Layers를 없애 보자.
 
-![image](https://github.com/ownvoy/DeepSync/assets/96481582/c2b795df-6557-4f4e-961f-318688dd584a)
-
 # 2 Main
 
 ## 2.1 Overview
 ![image](https://github.com/ownvoy/DeepSync/assets/96481582/86308dbc-8c17-4022-9e59-48f50223648d)
 
 - 마지막 conv layer를 통과한 결과물: $k^{2}\times(C+1)$
-- $k$는 class의 위치 정보를 나타냄. 아래 그림서 $k=3$ 
+- $k$는 class의 위치 정보를 나타냄. 아래 그림서 $k=3$
+  
 ![image](https://github.com/ownvoy/DeepSync/assets/96481582/8fb94ff0-cb32-418f-9830-62076db9ac38)
 
 - $C$: object category
+
 ![image](https://github.com/ownvoy/DeepSync/assets/96481582/748598ca-764c-417d-993b-433396814f1f)
 
 - 자전거에 대해 보자고 할 때, 그림 중앙에는 몸통이 있고 왼쪽 아래에는 앞바퀴가 있는 것을 알 수 있다.(사진에 대한 대략적인 정보)
+
 ![image](https://github.com/ownvoy/DeepSync/assets/96481582/939a874f-d1e8-4929-a4b1-c536b5e54fc9)
 
 - 카테고리가 $C+1$개, $k\times k$개의 bin
-![[Pasted image 20231122223607.png | 300]]
-__마지막 conv layer를 지나고 나온 결과물__
+
+![image](https://github.com/ownvoy/DeepSync/assets/96481582/6aea6550-1a71-43c3-bb9b-26f7ccd693f2)
+
+> __마지막 conv layer를 지나고 나온 결과물__
+
 ### position-sensitive RoI pooling
 
 $r_{bike}$이라는 $3\times3$ table이 있다고 할 때, 그 중 맨 위 왼쪽 칸($i=0,j=0$)을 어떤 식으로 pooling 할까?
 
 RPN에서 나온 RoI들이 다음과 같다고 할 때,
-![[Pasted image 20231122190749.png]]
+
+![image](https://github.com/ownvoy/DeepSync/assets/96481582/56ea4969-e08a-409e-ba67-a07172c75d05)
+
 $r_{bike}(0,0)$ 은 맨 왼쪽 위 칸에 대한 정보(핸들)를 이용하여 pooling 하고 싶을 것.
 
-![[Pasted image 20231122224934.png | 300]]
+![image](https://github.com/ownvoy/DeepSync/assets/96481582/9d5dab84-207b-447a-8f74-4b18e145cb45)
+
 핸들에 대한 정보가 $z_{0,0,bike}$임
 $z_{0,0,bike}$와 RoI의 각 bin들과 곱해줘서 average pooling 해줄 거임.
 $$r_{bike}(0,0) = \frac{z_{0,0,bike} \times (x_0,y_0)+z_{0,0,bike}\times(x_0,y_1)+ \cdots +z_{0,0,bike}\times(x_2,y_2)}{9}$$
@@ -101,13 +108,14 @@ $$r_{c}= \sum\limits_{i,j} r_c(i,j)$$
 마찬가지로 $r_{dog},  r_{backgroud}$ 등을 구할 수 있을 것임.
 이 값 을 활용하여 roi가 뭔지 맞출 수 있음(softmax function)
 
-$$s_{c}=\frac{e^{r_c}}{\sum_{c=0}^{C}e^{r_c}}  $$
+$$s_{c}=\frac{e^{r_c}}{\overset{C}{\underset{c=0}{\sum}} e^{r_c}}$$
 
 이 $s_c$는 뒤에서 cross-entropy loss로 쓰임
 
 - 그냥 계산만 한거여서 learnable layer가 아님. => speed up
 
-![[Pasted image 20231122230903.png]]
+![image](https://github.com/ownvoy/DeepSync/assets/96481582/f01d3c9c-8791-4c8e-b713-b1f889d07eba)
+
 
 1. positional sensitive RoI pooling을 해서 __translation invariance__ 문제 해결
 2. __fully connected layer를 없앰__ 으로써 속도 향상 + end-to-end 학습
@@ -129,11 +137,12 @@ $$L(s,t_{x,y,w,h})=L_{cls}(S_{c^{*}})+ \lambda[c^{*}>0]L_{reg}(t,t^{*})$$
 - loss가 큰 순서로 정렬
 - loss가 크다는 것은 어려운 sample이라는 거임
 - 큰 순서대로 $B$개 뽑아, 학습
-![[Pasted image 20231122213332.png]]
+
+![image](https://github.com/ownvoy/DeepSync/assets/96481582/dd72e7ad-307f-437d-888f-840cec1b7761)
+
 - RoI 하나당 계산하는 시간이 거의 _cost-free_ 임. 그래서 training time이 많이 늘어나지 않음(Faster R-CNN에서는 2배 증가)
 
 ## 2.3 Results
-![[Pasted image 20231122213743.png]]
 
 
 
