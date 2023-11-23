@@ -148,5 +148,5 @@ summation of the cross-entropy loss and the box regression loss
 
 ![image](https://github.com/ownvoy/DeepSync/assets/96481582/9c8e4df0-92a7-43ef-997d-ea3371d9c6f1)
 
-
+test time이 faster r-cnn에 비해 압도적으로 빠른 것을 알 수 있다.
 
