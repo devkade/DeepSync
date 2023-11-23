@@ -1,7 +1,7 @@
 
-# 1.overview
+# 1. overview
 
-## 1.1objective
+## 1.1 objective
 1. translation invariance 문제를 해결해보자.
 2. 모델을 fully convolutional 하게 만들어보자.
 
