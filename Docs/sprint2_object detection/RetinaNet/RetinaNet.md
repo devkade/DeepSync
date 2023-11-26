@@ -1,7 +1,7 @@
 # Overview
 ## Objective
 **Positive / Negative example의 class imbalance problem을 해결하는 방법을 이해한다**
-+ <img src="figs\class imbalance.webp" title="class imbalance" alt="class imbalance"></img><br/>
++ ![image](https://github.com/devkade/DeepSync/assets/11837072/3e648c34-ac83-4ea8-bf96-2aec32a6eb99)<br/>
 
 ## Background
 ### Terminology
@@ -23,26 +23,26 @@
 + cross entropy(CE)
 + balanced cross entropy(BCE)
 + precision recall   
-<img src="figs\precision-recall.jpg"></img><br/>
+![image](https://github.com/devkade/DeepSync/assets/11837072/e0f743fb-0d6e-4c87-bd3b-c853673f132c)<br/>
     + **precision**
-        + <img src="figs\precision.png"></img><br/>
+        + ![image](https://github.com/devkade/DeepSync/assets/11837072/5dfc6090-6c35-4b1e-9439-7d65b55a8acd)<br/>
 
     + **recall**   
-        + <img src="figs\recall.png"></img><br/>
+        + ![image](https://github.com/devkade/DeepSync/assets/11837072/cb1497b5-8ea6-4e6c-a323-42422a740489)<br/>
 
 + precision recall graph   
-<img src="figs\precision-recall_graph.png"></img><br/>
+![image](https://github.com/devkade/DeepSync/assets/11837072/b6f7816b-8c38-46f9-9078-09cc253efde8)<br/>
 
 + average precision loss(AP-loss)   
-<img src="figs\ap_graph.png"></img><br/>
+![image](https://github.com/devkade/DeepSync/assets/11837072/5a3c73cf-e632-4773-9873-01a7cf00f4ad)<br/>
 
 <br></br>
 ### Type of object detection
 **two-stage object detection**   
-<img src="figs\twostage-obejct-detection.png" title="twostage-object-detection" alt="twostage-object-detection"></img><br/>
+![image](https://github.com/devkade/DeepSync/assets/11837072/bfecfbb1-2858-4ec1-9dbe-caebe4cab44d)<br/>
 
 **one-stage object detection**   
-<img src="figs\onestage-obejct-detection.png" title="onestage-object-detection" alt="onestage-object-detection"></img><br/>
+![image](https://github.com/devkade/DeepSync/assets/11837072/e255dcc4-786a-47f4-81f4-63215e25c370)<br/>
 + image당 10,000 ~ 100,000개의 candidate 존재함
 + 하지만 이중 target object을 포함한 candidate는 매우 적음
 + background는 easy negative sample이 되고 foreground는 hard positive sample이 됨
@@ -51,26 +51,26 @@
 <br></br>
 # Main
 ## Overview
-<img src="figs\RetinaNet.png" title="onestage-object-detection" alt="onestage-object-detection"></img><br/>
+![image](https://github.com/devkade/DeepSync/assets/11837072/eba719f9-cf04-4f7c-8ab1-0b70fb32c9ab)<br/>
 
 ### Loss design
 + **cross entropy loss**   
-<img src="figs\CE.png" title="cross entropy" alt="cross entropy"></img><br/>
+![image](https://github.com/devkade/DeepSync/assets/11837072/3b0cbc46-f65f-4741-92e6-39b8bc6e2578)<br/>
 
 + **balanced cross entropy loss**   
-<img src="figs\BCE.png" title="balanced cross entropy" alt="balanced cross entropy"></img><br/>
+![image](https://github.com/devkade/DeepSync/assets/11837072/fae75310-4406-4ed7-907a-30a197a6ee2d)<br/>
     + a weighting factor α∈[0,1] for class 1 and 1−α for class−1
 
 + **focal loss**   
-<img src="figs\focal loss.png" title="focal loss" alt="focal loss"></img><br/>
+![image](https://github.com/devkade/DeepSync/assets/11837072/a990ec87-03c7-40dc-b9e4-cc6faf358d06)<br/>
     + For instance, with γ=2, an example classified with pt=0.9 would have 100× lower loss compared with CE and    
     with pt≈0.968 it would have 1000× lower loss
     + **balanced focal loss**   
-    <img src="figs\Balanced focal loss.png" title="focal loss" alt="focal loss"></img><br/>
+    ![image](https://github.com/devkade/DeepSync/assets/11837072/650a47f8-0d66-4fbb-9388-9062c738a84d)<br/>
 
 ### Training
 1. Feature Pyramid by ResNet + FPN
-<img src="figs\RetinaNet_1.png" title="onestage-object-detection" alt="onestage-object-detection"></img><br/>
+![image](https://github.com/devkade/DeepSync/assets/11837072/48d79be4-7c3a-4fe0-adfe-fa03b077d588)<br/>
 + **Input : image**
 + **Process : feature extraction by ResNet + FPN**
 + **Output : feature pyramid(P5~P7)**
@@ -78,7 +78,7 @@
     여기서 backbone network는 ResNet 기반의 FPN(Feature Pyramid Network)를 사용합니다. pyramid level은 P3~P7로 설정합니다.
 <br></br>
 2. Classification by Classification subnetwork
-<img src="figs\RetinaNet_2.png" title="onestage-object-detection" alt="onestage-object-detection"></img><br/>
+![image](https://github.com/devkade/DeepSync/assets/11837072/0872af74-d958-4760-8e60-6e8a0be15421)<br/>
 + **Input : feature pyramid(P5~P7)**
 + **Process : classification by classification subnetwork**
 + **Output : 5 feature maps with KxA channel** 
@@ -89,7 +89,7 @@
     이를 통해 channel 수가 KxA인 5개(feature pyramid의 수)의 feature map을 얻을 수 있습니다. 
 <br></br>
 3. Bounding box regression by Bounding box regression subnetwork
-<img src="figs\RetinaNet_3.png" title="onestage-object-detection" alt="onestage-object-detection"></img><br/>
+![image](https://github.com/devkade/DeepSync/assets/11837072/7d668f9b-f9b6-4f8e-bee7-da56a250f7b6)<br/>
 + **Input : feature pyramid(P5~P7)**
 + **Process : bounding box regression by bounding box regression subnet**
 + **Output : 5 feature maps with 4xA channel**
@@ -104,10 +104,10 @@
 # Result
 ## Experiments
 **focal loss performance**   
-<img src="figs\Focal loss performance per focusing parameter.png" title="onestage-object-detection" alt="onestage-object-detection"></img><br/>
+![image](https://github.com/devkade/DeepSync/assets/11837072/29a7d775-262b-40f1-80cb-0f8d10f44533)<br/>
    
 **RetinaNet performance**   
-<img src="figs\RetinaNet_performance.png" title="onestage-object-detection" alt="onestage-object-detection"></img><br/>
+![image](https://github.com/devkade/DeepSync/assets/11837072/7c8223c5-c801-439d-acf7-08a03462aa04)<br/>
 
 # Conclusion
 + focal loss를 통해서 다른 여타의 복잡한 sampling 없이 효과적으로 class imbalance 문제를 해결 함.
