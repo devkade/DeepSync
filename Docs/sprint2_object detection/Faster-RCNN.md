@@ -1,20 +1,3 @@
----
-layout: post
-title: "[Paper] Faster R-CNN: Towards Real-Time Object\r Detection with Region Proposal Networks"
-author: Kade
-categories:
-  - Devlog
-  - ML/DL
-image: 
-description: ""
-tags:
-  - CV
-  - Paper
-  - ObjectDetection
-sitemap: true
----
-
-
 # Overview of R-CNN structure
 
 [![image](https://github.com/mouseku/Image/assets/64977390/c4de6db7-a1ac-489f-8422-c14a52b5b8b6)](https://www.arxiv-vanity.com/papers/1908.03673/)
