@@ -101,14 +101,12 @@ Anchor는 위 그림과 같이 일정 크기와 일정 비율로 사전 설정�
 - 8x8의 cell에 9개의 anchor를 적용해 8x8x9 개의 anchor가 형성된다. 
 
 Anchor Box는 다음과 같은 식을 통해 정의한다.
-$$\begin{gather*}
-w\times h = s^2 \\ \\
-w = {1 \over 2} \times h \\ \\
-{1 \over 2} \times {h^2} = s^2 \\ \\
-h = \sqrt{2s^2} \\ \\
-w = {{\sqrt{2s^2}} \over 2}
-\end{gather*}
-$$
+$$w\times h = s^2$$
+$$w = {1 \over 2} \times h$$
+$${1 \over 2} \times {h^2} = s^2$$
+$$h = \sqrt{2s^2}$$
+$$w = {{\sqrt{2s^2}} \over 2}$$
+
 - s : scale, 정사각형일 때의 길이
 - w : width
 - h : height
